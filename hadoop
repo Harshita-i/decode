@@ -1,0 +1,37 @@
+
+
+```
+hadoop version
+```
+
+```
+hdfs dfs -mkdir /user/AIML-A44
+hdfs dfs -ls /user
+```
+
+```
+gedit first.txt
+ls
+```
+
+```
+cat first.txt
+```
+
+```
+hdfs dfs -put first.txt /user/AIML-A44
+hdfs dfs -ls /user/AIML-A44/
+```
+
+```
+rm first.txt
+hdfs dfs -copyToLocal /user/AIML-A44/first.txt
+ls
+```
+
+```
+hdfs dfs -touchz /user/AIML-A44/second.txt
+hdfs dfs -ls
+```
+
+*(Extracted from your uploaded file )*
