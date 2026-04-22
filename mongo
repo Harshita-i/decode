@@ -1,0 +1,73 @@
+4. Basic MongoDB Commands (MQL) 
+Creating a Database and Collection 
+use bookstore          
+// Switch to (or create) 'bookstore' database 
+db.createCollection("books")  // Create 'books' collection 
+5. Insert Documents 
+Single Insert 
+db.books.insertOne({ 
+"title": "MongoDB Basics", 
+"author": "Jane Doe", 
+"price": 19.99, 
+"genres": ["Database", "Technology"], 
+"stock": 120, 
+"publishedYear": 2023 
+}) 
+Multiple Inserts 
+db.books.insertMany([ 
+  { 
+    "title": "Learn Python", 
+    "author": "John Smith", 
+    "price": 25.50, 
+    "genres": ["Programming"], 
+    "stock": 75, 
+    "publishedYear": 2022 
+  }, 
+  { 
+    "title": "JavaScript 101", 
+    "author": "Mary Jane", 
+    "price": 30, 
+    "genres": ["Web Development"], 
+    "stock": 50, 
+    "publishedYear": 2021 
+  } 
+]) 
+ 
+6. Read/Retrieve Documents 
+Find All Books 
+db.books.find() 
+Find with Condition 
+// Find books cheaper than $25 
+db.books.find({ price: { $lt: 25 } }) 
+ 
+// Find books by Jane Doe 
+db.books.find({ author: "Jane Doe" }) 
+Find with AND/OR 
+// Books by Jane Doe OR published in 2022 
+db.books.find({  
+$or: [  
+{ author: "Jane Doe" },  
+{ publishedYear: 2022 }  
+]  
+}) 
+// Books by Jane Doe AND under $20 
+db.books.find({  
+author: "Jane Doe",  
+price: { $lt: 20 }  
+}) 
+7. Update Documents 
+Update One Book 
+db.books.updateOne( 
+{ title: "MongoDB Basics" },  
+{ $set: { price: 17.99 } } 
+) 
+Update Multiple Books 
+db.books.updateMany( 
+{ author: "Jane Doe" }, 
+{ $set: { stock: 100 } } 
+) 
+8. Delete Documents 
+Delete One Book 
+db.books.deleteOne({ title: "JavaScript 101" }) 
+Delete Multiple Books 
+db.books.deleteMany({ stock: { $lt: 60 } })
