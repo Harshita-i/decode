@@ -1,0 +1,32 @@
+3.Capping values
+df1 = pd.read_csv(...)
+max_threshold = df1['acceleration'].quantile(0.95)
+min_threshold = df1['acceleration'].quantile(0.05)
+df1['acceleration'] = np.where(
+    df1['acceleration'] > max_threshold,
+    max_threshold,
+    df1['acceleration']
+)
+
+df1['acceleration'] = np.where(
+    df1['acceleration'] < min_threshold,
+    min_threshold,
+    df1['acceleration']
+)
+df1['acceleration'].max()
+df1['acceleration'].min()
+to check
+max ≤ max_threshold
+min ≥ min_threshold
+print((df1['acceleration'] > max_threshold).sum())
+print((df1['acceleration'] < min_threshold).sum())
+
+👉 Output should be 0
+1.using z score
+mean = df['mpg'].mean()
+std = df['mpg'].std()
+
+z = (df['mpg'] - mean) / std
+
+# Remove outliers
+df = df[(z < 3) & (z > -3)]
