@@ -1,0 +1,38 @@
+CREATE TABLE shopping1 (
+    id INT,
+    product STRING,
+    price FLOAT
+)
+PARTITIONED BY (shopping3 STRING)
+CLUSTERED BY (id) INTO 3 BUCKETS
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+SET hive.enforce.bucketing = true;
+INSERT INTO TABLE shopping1 PARTITION (shopping3='electronics')
+VALUES
+(1, 'mobile', 20000),
+(2, 'laptop', 50000),
+(3, 'headphones', 2000);
+ SHOW PARTITIONS shopping1;
+SELECT * FROM shopping1;
+ hdfs dfs -ls /user/hive/warehouse/shopping1/
+ hdfs dfs -ls /user/hive/warehouse/shopping1/shopping3=electronics/
+3a
+
+CREATE DATABASE shopping;
+USE shopping;
+CREATE TABLE shopping1 (
+    id INT,
+    product STRING,
+    price FLOAT
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+ gedit shop.txt
+1,mobile,20000
+2,laptop,50000
+3,watch,3000
+ LOAD DATA LOCAL INPATH '/home/cloudera/shop.txt'
+INTO TABLE shopping1;
+ SELECT * FROM shopping1;
+9th
